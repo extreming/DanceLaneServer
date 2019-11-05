@@ -60,19 +60,19 @@
         <el-form-item label="年龄"><el-input v-model="form.age" /></el-form-item>
         <el-form-item label="性别">
           <el-select v-model="form.sex" placeholder="请选择性别">
-            <el-option label="男" value="M"></el-option>
-            <el-option label="女" value="F"></el-option>
+            <el-option label="男" value="M" />
+            <el-option label="女" value="F" />
           </el-select>
         </el-form-item>
         <el-form-item label="课程">
           <el-select v-model="form.course" placeholder="请选择性别">
-            <el-option label="少儿民族" value="1"></el-option>
-            <el-option label="现代舞" value="2"></el-option>
-            <el-option label="New Jazz" value="3"></el-option>
-            <el-option label="Popping" value="4"></el-option>
-            <el-option label="Breaking" value="5"></el-option>
-            <el-option label="Locking" value="6"></el-option>
-            <el-option label="House" value="7"></el-option>
+            <el-option label="少儿民族" value="1" />
+            <el-option label="现代舞" value="2" />
+            <el-option label="New Jazz" value="3" />
+            <el-option label="Popping" value="4" />
+            <el-option label="Breaking" value="5" />
+            <el-option label="Locking" value="6" />
+            <el-option label="House" value="7" />
           </el-select>
         </el-form-item>
         <el-form-item label="学校"><el-input v-model="form.school" style="width: 534px;" /></el-form-item>
@@ -80,26 +80,26 @@
         <el-form-item label="家长姓名"><el-input v-model="form.parentsName" /></el-form-item>
         <el-form-item label="与报名人关系">
           <el-select v-model="form.course" placeholder="请选择课程">
-            <el-option label="父母" value="父母"></el-option>
-            <el-option label="同学" value="同学"></el-option>
-            <el-option label="朋友" value="朋友"></el-option>
-            <el-option label="同事" value="同事"></el-option>
-            <el-option label="其他" value="其他"></el-option>
+            <el-option label="父母" value="父母" />
+            <el-option label="同学" value="同学" />
+            <el-option label="朋友" value="朋友" />
+            <el-option label="同事" value="同事" />
+            <el-option label="其他" value="其他" />
           </el-select>
         </el-form-item>
         <el-form-item label="家长电话"><el-input v-model="form.parentsPhone" /></el-form-item>
         <el-form-item label="邮箱"><el-input v-model="form.mail" /></el-form-item>
         <el-form-item label="地址"><el-input v-model="form.address" /></el-form-item>
-        <el-form-item label="留言"><el-input type="textarea" v-model="form.message" style="width: 534px;" /></el-form-item>
+        <el-form-item label="留言"><el-input v-model="form.message" type="textarea" style="width: 534px;" /></el-form-item>
         <el-form-item label="报名时间"><el-input v-model="form.createTime" disabled="" /></el-form-item>
         <el-form-item label="状态" prop="status">
           <el-select v-model="form.status" placeholder="请选择状态">
-            <el-option label="待沟通" value="0"></el-option>
-            <el-option label="已分班" value="1"></el-option>
-            <el-option label="待跟进" value="1"></el-option>
+            <el-option label="待沟通" value="0" />
+            <el-option label="已分班" value="1" />
+            <el-option label="待跟进" value="1" />
           </el-select>
         </el-form-item>
-        <el-form-item v-show="showEdit" label="处理备注" prop="desc"><el-input type="textarea" v-model="form.desc" style="width: 534px;" /></el-form-item>
+        <el-form-item v-show="showEdit" label="处理备注" prop="desc"><el-input v-model="form.desc" type="textarea" style="width: 534px;" /></el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogFlag = false">取 消</el-button>
@@ -125,21 +125,21 @@ export default {
     }
   },
   data() {
-    let validateStatus = (rule, value, callback) => {
+    const validateStatus = (rule, value, callback) => {
       if (value === '1' || value === '2') {
         callback()
       } else {
         callback(new Error('请更改报名表状态'))
       }
     }
-    let validateName = (rule, value, callback) => {
+    const validateName = (rule, value, callback) => {
       if (/^(?:[\u4e00-\u9fa5·]{2,16})$/.test(value) || value === '') {
         callback()
       } else {
         callback(new Error('请输入正确的姓名'))
       }
     }
-    let validatePhone = (rule, value, callback) => {
+    const validatePhone = (rule, value, callback) => {
       if (/^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-7|9])|(?:5[0-3|5-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[1|8|9]))\d{8}$/.test(value) || value === '') {
         callback()
       } else {
@@ -194,7 +194,7 @@ export default {
       this.listLoading = true
       getApply(params).then(res => {
         this.list = res.data
-        this.listLoading = false;
+        this.listLoading = false
       })
     },
     goSearch() {
@@ -222,9 +222,10 @@ export default {
       console.log(this.form)
     },
     changeApply() {
+      if (!this.showEdit) return
       this.$refs.ruleForm.validate(valid => {
-        if(valid) {
-          let params = Object.assign(this.form,{ id: this.form._id  })
+        if (valid) {
+          const params = Object.assign(this.form, { id: this.form._id })
           updateApply(params).then(res => {
             this.$alert('处理报名表成功!').then(() => {
               this.dialogFlag = false
