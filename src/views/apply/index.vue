@@ -154,7 +154,7 @@ export default {
       form: {},
       rules: {
         status: [
-          { validator: validateStatus, trigger: 'change' }
+          { validator: validateStatus, trigger: 'blur' }
         ],
         desc: [
           { required: true, message: '处理备注不能为空', trigger: 'change' }
@@ -222,18 +222,21 @@ export default {
       console.log(this.form)
     },
     changeApply() {
-      if (!this.showEdit) return
-      this.$refs.ruleForm.validate(valid => {
-        if (valid) {
-          const params = Object.assign(this.form, { id: this.form._id })
-          updateApply(params).then(res => {
-            this.$alert('处理报名表成功!').then(() => {
-              this.dialogFlag = false
-              this.queryList(this.searchForm)
+      if (this.showEdit) {
+        this.$refs.ruleForm.validate(valid => {
+          if (valid) {
+            const params = Object.assign(this.form, { id: this.form._id })
+            updateApply(params).then(res => {
+              this.$alert('处理报名表成功!').then(() => {
+                this.dialogFlag = false
+                this.queryList(this.searchForm)
+              })
             })
-          })
-        }
-      })
+          }
+        })
+      } else {
+        this.showEdit = false
+      }
     }
   }
 }
