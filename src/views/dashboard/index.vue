@@ -6,15 +6,13 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
+  name: 'Dashboard',
   data() {
     return {
       nickname: sessionStorage.getItem('nickname')
     }
-  },
-  name: 'Dashboard'
+  }
   // computed: {
   //   ...mapGetters([
   //     'nickname'
@@ -25,12 +23,12 @@ export default {
 
 <style lang="scss" scoped>
 .dashboard {
-  &-container {
-    margin: 30px;
-  }
-  &-text {
-    font-size: 30px;
-    line-height: 46px;
-  }
+    &-container {
+        margin: 30px;
+    }
+    &-text {
+        font-size: 30px;
+        line-height: 46px;
+    }
 }
 </style>

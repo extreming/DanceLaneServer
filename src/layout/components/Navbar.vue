@@ -37,14 +37,14 @@ import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 
 export default {
+  components: {
+    Breadcrumb,
+    Hamburger
+  },
   data() {
     return {
       avatar: sessionStorage.getItem('avatar')
     }
-  },
-  components: {
-    Breadcrumb,
-    Hamburger
   },
   computed: {
     ...mapGetters([
